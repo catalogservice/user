@@ -4,22 +4,22 @@ import { Document, Mongoose, ObjectId } from 'mongoose';
 export type UserDocument = User & Document;
 @Schema()
 export class User {
-    
-    @Prop(String)
+
+    @Prop({ type: String, required: true })
     first_name: string
-    @Prop(String)
+    @Prop({ type: String })
     middle_name: string
-    @Prop(String)
+    @Prop({ type: String, required: true })
     last_name: string
-    @Prop(String)
+    @Prop({ type: String, unique: true, required: true })
     username: string
-    @Prop(String)
+    @Prop({ type: String, required: true })
     password: string
     // @Prop(Number)
     // primary_number: number
     // @Prop(Number)
     // secondary_number: number
-    @Prop(String)
+    @Prop({ type: String,required:true,unique:true })
     email: string
     // @Prop(String)
     // city: string
