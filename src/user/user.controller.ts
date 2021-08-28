@@ -34,6 +34,12 @@ export class UserController {
         return 'get current user'
     }
 
+    @Get(":username")
+    async getUserByUsername(@Param('username') username: string): Promise<any> {
+        let response = await this.userService.getUserByUsername(username);
+        if (!response) return 'no user found';
+        return response
+    }
 
     @Post()
     async createUser(@Body() body: CreateUserDto): Promise<createUserResponseDto> {
@@ -48,9 +54,9 @@ export class UserController {
     }
 
     @Delete(':id')
-    async deleteUser(@Param('id') id:string): Promise<any> {
+    async deleteUser(@Param('id') id: string): Promise<any> {
         return await this.userService.deleteUser(id)
-        
+
     }
 
 }

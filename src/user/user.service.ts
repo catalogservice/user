@@ -21,7 +21,10 @@ export class UserService {
     }
 
     async deleteUser(id: string): Promise<any> {
-        await this.userModel.findByIdAndDelete(id);
+        return await this.userModel.findByIdAndDelete(id);
+    }
 
+    async getUserByUsername(username: string) {
+        return await this.userModel.findOne({ username });
     }
 }
