@@ -1,5 +1,7 @@
+import { ObjectId } from "mongoose";
+
 export class createUserResponseDto {
-    id: string;
+    id?: string;
     username: string;
     first_name: string;
     last_name: string;

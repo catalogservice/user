@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { createUserResponseDto } from './dto/createResponse.dto';
 import { CreateUserDto } from './dto/createUser.dto';
@@ -15,7 +15,7 @@ export class UserController {
 
     @Get()
     async getAllUsers(): Promise<createUserResponseDto[]> {
-        let users = await this.userService.getUser();
+        let users = await this.userService.getUser() as any;
         let response: createUserResponseDto[] = [];
         users.forEach(user => {
             let item: createUserResponseDto = {
@@ -37,7 +37,7 @@ export class UserController {
 
     @Post()
     async createUser(@Body() body: CreateUserDto): Promise<createUserResponseDto> {
-        let newUser = await this.userService.createUser(body);
+        let newUser = await this.userService.createUser(body) as any;
         let response: createUserResponseDto = {
             username: newUser.username,
             id: newUser._id,
@@ -47,13 +47,10 @@ export class UserController {
         return response;
     }
 
-    @Delete()
-    deleteUser(): string {
-        return 'delete user'
+    @Delete(':id')
+    async deleteUser(@Param('id') id:string): Promise<any> {
+        return await this.userService.deleteUser(id)
+        
     }
 
-    @Post('login')
-    login(@Body() loginDto: LoginDto): string {
-        return "login"
-    }
 }
