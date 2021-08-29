@@ -1,4 +1,5 @@
 import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
+import { EventPattern } from '@nestjs/microservices';
 import { ApiTags } from '@nestjs/swagger';
 import { createUserResponseDto } from './dto/createResponse.dto';
 import { CreateUserDto } from './dto/createUser.dto';
@@ -59,4 +60,9 @@ export class UserController {
 
     }
 
+    @EventPattern('NEW USER')
+    async createUserAMQ(data:any){
+        console.log(JSON.parse(data));
+        // this.userService.createUser(data)
+    }
 }
