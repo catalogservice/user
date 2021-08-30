@@ -62,7 +62,6 @@ export class UserController {
 
     @EventPattern('NEW USER')
     async createUserAMQ(data:any){
-        console.log(JSON.parse(data));
-        // this.userService.createUser(data)
+        this.userService.createUser( JSON.parse(data))
     }
 }
